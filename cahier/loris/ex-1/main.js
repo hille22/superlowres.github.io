@@ -1,35 +1,50 @@
-/**
- * 	Example P5JS canvas
- */
+const NUM_X = 32;
+const NUM_Y = 32;
+const CELL = 16;
 
-function preload(){
+const data = new Array(NUM_X * NUM_Y).fill(0)
+
+function preload() {
 
 }
 
-function setup(){
+function setup() {
 	createCanvas(windowWidth, windowHeight)
 }
 
-function draw(){
-	//background(255)
-	fill(255)
-	stroke(0)
-	rect(20, 20, 100, 100)
-	ellipse(180, 70, 100, 100)
+function draw() {
 
-	if (mouseIsPressed){
-		line(mouseX, mouseY, pmouseX, pmouseY)
+	for (let j = 0; j < NUM_Y; j++) {
+		for (let i = 0; i < NUM_X; i++) {
+
+			const idx = i + j * NUM_X;
+			data[idx] =  i + j % 2;
+		}
+	}
+
+	for (let j = 0; j < NUM_Y; j++) {
+		for (let i = 0; i < NUM_X; i++) {
+
+			const x = i * CELL +20
+			const y = j * CELL +20
+
+			const v = data[idx];
+
+			fill(v * 255)
+
+			rect(x, y, CELL, CELL)
+		}
 	}
 }
 
-function mousePressed(){
+function mousePressed() {
 
 }
 
-function keyPressed(){
+function keyPressed() {
 
 }
 
-function windowResized(){
+function windowResized() {
 	resizeCanvas(windowWidth, windowHeight)
 }
