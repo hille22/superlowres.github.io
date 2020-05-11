@@ -37,6 +37,7 @@ function draw(){
 	}
 	//translate(windowWidth/2-(i * CELL), windowHeight/2-(y * CELL))
 	// rendering
+	//test
 
 	const ox = (width-(NUM_X) * CELL) /2
 	const oy = (height-(NUM_Y) * CELL) /2
