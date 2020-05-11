@@ -16,19 +16,15 @@ function draw(){
 	for(let j=0; j<NUM_Y; j++) {
 		for(let i=0; i<NUM_X; i++){
 			const idx = i + j * NUM_X;
-			data[idx] = (2*3.14)*16;
+			data[idx] = (i+j)%2;
 		}
 	}
-	//translate(windowWidth/2-(i * CELL), windowHeight/2-(y * CELL))
-	// rendering
 
-	const ox = (width-(NUM_X) * CELL) /2
-	const oy = (height-(NUM_Y) * CELL) /2
-
+	//rendering
 	for(let j=0; j<NUM_Y; j++) {
 		for(let i=0; i<NUM_X; i++){
-			const x = i * CELL + ox;
-			const y = j * CELL + oy;
+			const x = i * CELL + 20;
+			const y = j * CELL + 20;
 			const idx = i + j * NUM_X;
 			const v = data[idx];
 			fill(v * 255);
