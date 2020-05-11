@@ -14,20 +14,22 @@ function setup() {
 
 function draw() {
 
+
 	for (let j = 0; j < NUM_Y; j++) {
 		for (let i = 0; i < NUM_X; i++) {
-
-			const idx = i + j * NUM_X;
-			data[idx] =  i + j % 2;
+			const idx = i + j * NUM_X
+			data[idx] = (i + j) % (NUM_X / CELL);
 		}
 	}
 
+
+
 	for (let j = 0; j < NUM_Y; j++) {
 		for (let i = 0; i < NUM_X; i++) {
 
-			const x = i * CELL +20
-			const y = j * CELL +20
-
+			const x = i * CELL + (width/2 - NUM_X *CELL/2)
+			const y = j * CELL + (height/2 - NUM_Y *CELL/2)
+			const idx = i + j  * NUM_X;
 			const v = data[idx];
 
 			fill(v * 255)
