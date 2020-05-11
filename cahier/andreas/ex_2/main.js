@@ -20,12 +20,32 @@ function sign(v) {
 	else return 1
 }
 
+// Smooth operation
+// https://www.iquilezles.org/www/articles/distfunctions/distfunctions.htm
+function smoothUnion( d1, d2, k ) {
+    const h = clamp(0.5 + 0.5 * (d2-d1) / k, 0.0, 1.0 );
+    return mix( d2, d1, h ) - k * h * (1.0-h);
+}
+
+function clamp(v, min, max) {
+	if (v < min) return min
+	if (v > max) return max
+	return v
+}
+
+function mix(v1, v2, a){
+	return v1 * (1 - a) + v2 * a
+}
+
 function draw(){
 
 	const x1 = Math.sin(frameCount*0.021)*0.4
 	const y1 = Math.cos(frameCount*0.032)*0.4
+	const r1 = 0.4
+
 	const x2 = Math.sin(frameCount*0.043)*0.4
 	const y2 = Math.cos(frameCount*0.034)*0.4
+	const r2 = 0.4
 
 	// On "remplit" le tableau des données "data"
 	// avec des valeurs entre 0.0 et 1.0
@@ -41,9 +61,9 @@ function draw(){
 			// on calcule la distance de chaque celle par raport a un "centre"
 			let d = 1e100
 			// cercle 1
-			d = Math.min(dist(0, 0, u+x1, v+y1) - 0.3, d)
+			d = smoothUnion(dist(0, 0, u+x1, v+y1) - r1, d, 0.3)
 			// cercle 2
-			d = Math.min(dist(0, 0, u-x2, v-y2) - 0.3, d)
+			d = smoothUnion(dist(0, 0, u-x2, v-y2) - r2, d, 0.3)
 
 			// visualization distance
 			// data[idx] = d
@@ -52,10 +72,10 @@ function draw(){
 			// data[idx] = sign(d)
 
 			// visualization outline (avec abs())
-			// data[idx] = 1.0 - Math.exp(-10 * Math.abs(d))
+			data[idx] = 1.0 - Math.exp(-20 * Math.abs(d))
 
 			// visualization fill
-			data[idx] = 1.0 - Math.exp(-15 * d)
+			// data[idx] = 1.0 - Math.exp(-15 * d)
 
 			// visualization fill
 			// data[idx] = Math.cos(d * 5 + frameCount * 0.2)
