@@ -18,16 +18,21 @@ function sign(v){
 
 function draw(){
 
+	const x1 = Math.sin(frameCount*0.02)*0.4
+	const y1 = Math.sin(frameCount*0.02)*0.4
+	const x2 = Math.sin(frameCount*0.02)*0.4
+	const y2 = Math.sin(frameCount*0.02)*0.4
+
 	for(let j=0; j<NUM_Y; j++) {
 		for(let i=0; i<NUM_X; i++){
 			const idx = i + j * NUM_X;
 			const u = (i * 2 - NUM_X) / NUM_X;
 			const v = (j * 2 - NUM_Y) / NUM_Y;
 			let d = 1e100
-			d = Math.min(dist(0,0,u+0.3,v+0.2) -0.2, d)
-			d = Math.min(dist(0,0,u-0.6,v-0.5) -0.5, d)
-			// data[idx] =  sign(d);
-			data[idx] = 1.0 - Math.exp(-10 * Math.abs(d))
+			d = Math.min(dist(0,0,u+x1,v+y1) -0.2, d)
+			d = Math.min(dist(0,0,u-x2,v-y2) -0.5, d)
+			 //data[idx] =  sign(d);
+			data[idx] = 1.0 - Math.exp(-30 * Math.abs(d))
 		}
 	}
 	//translate(windowWidth/2-(i * CELL), windowHeight/2-(y * CELL))
