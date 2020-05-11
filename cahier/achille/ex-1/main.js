@@ -23,8 +23,11 @@ function draw(){
 			const idx = i + j * NUM_X;
 			const u = (i * 2 - NUM_X) / NUM_X;
 			const v = (j * 2 - NUM_Y) / NUM_Y;
-			let d = dist(0,0,u,v) -1.0
-			data[idx] =  sign(d);
+			let d = 1e100
+			d = Math.min(dist(0,0,u+0.3,v+0.2) -0.2, d)
+			d = Math.min(dist(0,0,u-0.6,v-0.5) -0.5, d)
+			// data[idx] =  sign(d);
+			data[idx] = 1.0 - Math.exp(-10 * Math.abs(d))
 		}
 	}
 	//translate(windowWidth/2-(i * CELL), windowHeight/2-(y * CELL))
