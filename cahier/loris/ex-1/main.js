@@ -26,7 +26,9 @@ function sign(v) {
 
 function draw() {
 
+	noStroke()
 
+	
 	for (let j = 0; j < NUM_Y; j++) {
 		for (let i = 0; i < NUM_X; i++) {
 			const idx = i + j * NUM_X
@@ -36,11 +38,11 @@ function draw() {
 
 
 			for (let c = 0; c < N_CIRCLE; c++) {
-				d = Math.min(dist(0, 0, u + (c / 10) + eval(posX[c]), v - (c / 10) + eval(posY[c])) - .3, d)
+				d = Math.min(dist(0, 0, u  + (-0.5 + (c/10)) + eval(posX[c]), v  + (-0.5 + (c/10)) + eval(posY[c])) - .3, d)
 			}
 			//d = Math.min(dist(0,0,u + x2,v + y2) - .3, d)
 
-			data[idx] = 1 - Math.exp(-15 * Math.abs(d)) // outline
+			data[idx] = 1 - Math.exp(-5 * Math.abs(d)) // outline
 			//data[idx] = sign(d) //pixel perfect
 			//data[idx] = d // gradient
 
